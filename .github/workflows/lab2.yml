@@ -1,0 +1,26 @@
+name: Lab 2 CI
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "lab2/**"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "lab2/**"
+
+jobs:
+  lab2-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Run Lab 2 tests
+        run: dotnet test lab2/lab2.slnx

@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ScDict/ScDict.fsproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ScDict.Tests/ScDict.Tests.fsproj" />
+  </Folder>
+</Solution>

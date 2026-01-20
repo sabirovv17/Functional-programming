@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <assembly fullname="ScDict">
+    <resource name="FSharpSignatureData.ScDict" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedData.ScDict" action="remove"></resource>
+    <resource name="FSharpSignatureDataB.ScDict" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedDataB.ScDict" action="remove"></resource>
+    <resource name="FSharpOptimizationData.ScDict" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedData.ScDict" action="remove"></resource>
+    <resource name="FSharpOptimizationDataB.ScDict" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedDataB.ScDict" action="remove"></resource>
+    <resource name="FSharpOptimizationInfo.ScDict" action="remove"></resource>
+    <resource name="FSharpSignatureInfo.ScDict" action="remove"></resource>
+  </assembly>
+</linker>

@@ -1,0 +1,14 @@
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/obj/Debug/net10.0/ScDict.fsproj.AssemblyReference.cache
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/obj/Debug/net10.0/ScDict.AssemblyInfoInputs.cache
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/obj/Debug/net10.0/ScDict.AssemblyInfo.fs
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/obj/Debug/net10.0/ScDict.fsproj.CoreCompileInputs.cache
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/obj/Debug/net10.0/ScDict.sourcelink.json
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/bin/Debug/net10.0/ScDict.deps.json
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/bin/Debug/net10.0/ScDict.dll
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/bin/Debug/net10.0/ScDict.pdb
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/bin/Debug/net10.0/ScDict.xml
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/obj/Debug/net10.0/ScDict.dll
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/obj/Debug/net10.0/refint/ScDict.dll
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/obj/Debug/net10.0/ScDict.xml
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/obj/Debug/net10.0/ScDict.pdb
+/Users/amir/Desktop/itmo/Functional-programming/lab2/src/ScDict/obj/Debug/net10.0/ref/ScDict.dll

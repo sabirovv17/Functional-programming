@@ -18,7 +18,7 @@ let solveWithTailRecursion () =
     loopA minA Set.empty |> Set.count
 
 //Обычная рекурсия
-// После рекурсивного вызова выполняется операция объединения множеств
+//После вызова рекурсии выполняется объединение множеств
 let solveWithRecursion () =
     let rec getPowersForA a =
         if a > maxA then Set.empty
@@ -42,7 +42,7 @@ let solveWithRecursion2 () =
     |> Set.ofList
     |> Set.count
 
-// 3. Модульная реализация (генерация, фильтрация, свёртка)
+//Модульная реализация (генерация, фильтрация, свёртка)
 let solveModular () =
     // Генерация всех пар (a, b)
     let generatePairs () : (int * int) list =

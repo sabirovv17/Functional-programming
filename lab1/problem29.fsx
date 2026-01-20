@@ -97,12 +97,12 @@ let solveWithMap2 () =
 
 //Цикл
 let solveWithLoop () =
-    let mutable distinctValues = Set.empty<bigint>
-    for a in minA..maxA do
-        for b in minB..maxB do
-            let value = pown (bigint a) b
-            distinctValues <- Set.add value distinctValues
-    Set.count distinctValues
+    [minA..maxA]
+    |> List.collect (fun a ->
+        [minB..maxB]
+        |> List.map (fun b -> pown (bigint a) b))
+    |> Set.ofList
+    |> Set.count
 
 //List comprehension
 let solveWithComprehension () =
@@ -131,13 +131,12 @@ let solveWithLazySequence () =
 //ленивая генерация степеней
 let solveWithLazySequence2 () =
     let powersOf (a: int) =
-        Seq.initInfinite (fun i -> pown (bigint a) (i + minB))
-        |> Seq.takeWhile (fun _ -> true) // бесконечная
+        Seq.init (maxB - minB + 1) (fun i -> pown (bigint a) (i + minB))
     
     // Генерируем все степени для всех оснований
     seq { minA..maxA }
     |> Seq.collect (fun a ->
-        powersOf a |> Seq.take (maxB - minB + 1))
+        powersOf a)
     |> Set.ofSeq
     |> Set.count
 

@@ -54,9 +54,9 @@ let solveModular () =
     |> sumAll
 
 //Генерация последовательности при помощи отображения (map)
-// Используем unfold для генерации и map для преобразования
+//unfold для генерации и map для преобразования
 let solveWithMap () =
-    // Генерируем пары (текущее, следующее) и извлекаем текущее
+    // Генерируем пары (текущее, следующее) и берем текущее
     let fibSequence =
         Seq.unfold (fun (a, b) -> 
             if a > limit then None 
@@ -89,34 +89,24 @@ let solveWithMap2 () =
 
 //циклы
 let solveWithLoop () =
-    let mutable sum = 0
-    let mutable a = 1
-    let mutable b = 2
-    while a <= limit do
-        if a % 2 = 0 then
-            sum <- sum + a
-        let temp = a + b
-        a <- b
-        b <- temp
-    sum
+    let fibs =
+        Seq.unfold (fun (a, b) ->
+            if a > limit then None
+            else Some(a, (b, a + b))) (1, 2)
+
+    fibs
+    |> Seq.filter (fun x -> x % 2 = 0)
+    |> Seq.sum
 
 // Использование for с sequence expression
 let solveWithForLoop () =
-    let fibs = seq {
-        let mutable a = 1
-        let mutable b = 2
-        while a <= limit do
-            yield a
-            let temp = a + b
-            a <- b
-            b <- temp
-    }
-    
-    let mutable sum = 0
-    for f in fibs do
-        if f % 2 = 0 then
-            sum <- sum + f
-    sum
+    let fibs =
+        Seq.unfold (fun (a, b) ->
+            if a > limit then None
+            else Some(a, (b, a + b))) (1, 2)
+
+    fibs
+    |> Seq.fold (fun acc x -> if x % 2 = 0 then acc + x else acc) 0
 
 //ленивые последовательности (Seq)
 let solveWithLazySequence () =

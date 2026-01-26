@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Interp.Cli/Interp.Cli.fsproj" />
+    <Project Path="src/Interp.Core/Interp.Core.fsproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Interp.Tests/Interp.Tests.fsproj" />
+  </Folder>
+</Solution>

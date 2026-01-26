@@ -1,0 +1,26 @@
+name: Lab 3 CI
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "lab3/**"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "lab3/**"
+
+jobs:
+  lab3-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Run Lab 3 tests
+        run: dotnet test lab3/lab3.slnx

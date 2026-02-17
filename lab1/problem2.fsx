@@ -1,8 +1,8 @@
-//Problem 2: Even Fibonacci Numbers
+//Even Fibonacci Numbers
 
 let limit = 4_000_000
 
-//Хвостоявая рекурсия
+//хвостоявая рекурсия
 let solveWithTailRecursion () =
     let rec loop a b acc =
         if a > limit then acc
@@ -10,13 +10,13 @@ let solveWithTailRecursion () =
         else loop b (a + b) acc
     loop 1 2 0
 
-//Обычная рекурсия
+//обычная рекурсия
 let solveWithRecursion () =
     let rec fib n =
         if n <= 1 then n
         else fib (n - 1) + fib (n - 2)
     
-    // Находим числа Фибоначчи до limit и суммируем чётные
+    //находим числа фибоначчи до лимита и + чётные
     let rec sumEvenFib n acc =
         let f = fib n
         if f > limit then acc
@@ -24,7 +24,7 @@ let solveWithRecursion () =
         else sumEvenFib (n + 1) acc
     sumEvenFib 1 0
 
-//Альтернативная версия с явной нехвостовой рекурсией
+//нехвостовая рекурсия
 let solveWithRecursion2 () =
     let rec sumEvenFibFrom a b =
         if a > limit then 0
@@ -32,55 +32,48 @@ let solveWithRecursion2 () =
         else sumEvenFibFrom b (a + b)
     sumEvenFibFrom 1 2
 
-//Модульная реализация (генерация, фильтрация, свёртка)
 //генерация -> фильтрация -> свёртка
 let solveModular () =
-    // Генерация последовательности Фибоначчи до limit
     let generateFibonacci () =
         let rec gen a b acc =
             if a > limit then List.rev acc
             else gen b (a + b) (a :: acc)
         gen 1 2 []
     
-    //Фильтрация чётных чисел
     let filterEven = List.filter (fun x -> x % 2 = 0)
     
-    //Свёртка 
     let sumAll = List.fold (+) 0
     
-    //Композиция функций
     generateFibonacci ()
     |> filterEven
     |> sumAll
 
-//Генерация последовательности при помощи отображения (map)
+//генерация последовательности при помощи мапы
 //unfold для генерации и map для преобразования
 let solveWithMap () =
-    // Генерируем пары (текущее, следующее) и берем текущее
     let fibSequence =
         Seq.unfold (fun (a, b) -> 
             if a > limit then None 
             else Some(a, (b, a + b))) (1, 2)
         |> Seq.toList
     
-    // Применяем map для преобразования: чётные -> значение, нечётные -> 0
+    // map: чётные -> значение; нечётные -> 0
     fibSequence
     |> List.map (fun x -> if x % 2 = 0 then x else 0)
     |> List.sum
 
-// Альтернативная версия с использованием map для индексации
+//использование map для индексации
 let solveWithMap2 () =
-    // Создаём достаточно большой список индексов
     let indices = [1..50]
     
-    // Функция для вычисления n-го числа Фибоначчи (итеративно)
+    //вычисление нного числа Фибоначчи
     let fibAt n =
         let rec loop i a b =
             if i = n then a
             else loop (i + 1) b (a + b)
         loop 1 1 2
     
-    // Отображаем индексы в числа Фибоначчи
+    //индексы -> Фибоначчи
     indices
     |> List.map fibAt
     |> List.takeWhile (fun x -> x <= limit)
@@ -98,7 +91,7 @@ let solveWithLoop () =
     |> Seq.filter (fun x -> x % 2 = 0)
     |> Seq.sum
 
-// Использование for с sequence expression
+//for с sequence expression
 let solveWithForLoop () =
     let fibs =
         Seq.unfold (fun (a, b) ->
@@ -110,7 +103,7 @@ let solveWithForLoop () =
 
 //ленивые последовательности (Seq)
 let solveWithLazySequence () =
-    //Бесконечная последовательность Фибоначчи
+    //бесконечная последовательность
     let fibonacciSeq =
         Seq.unfold (fun (a, b) -> Some(a, (b, a + b))) (1, 2)
     

@@ -1,11 +1,11 @@
-//Problem 29: Distinct Powers
+//Distinct Powers
 
 let minA, maxA = 2, 100
 let minB, maxB = 2, 100
 
-//Хвостовая рекурсия
+//хвостовая рекурсия
 let solveWithTailRecursion () =
-    //Set для хранения уникальных значений
+    //Set для уникальных значений
     let rec loopA a acc =
         if a > maxA then acc
         else
@@ -17,8 +17,7 @@ let solveWithTailRecursion () =
             loopA (a + 1) (loopB minB acc)
     loopA minA Set.empty |> Set.count
 
-//Обычная рекурсия
-//После вызова рекурсии выполняется объединение множеств
+//обычная рекурсия
 let solveWithRecursion () =
     let rec getPowersForA a =
         if a > maxA then Set.empty
@@ -31,7 +30,7 @@ let solveWithRecursion () =
             Set.union (getPowersForB minB) (getPowersForA (a + 1))
     getPowersForA minA |> Set.count
 
-// Альтернативная версия - рекурсивно собираем список
+//рекурсивно собираем список
 let solveWithRecursion2 () =
     let rec collectPowers a b =
         if a > maxA then []
@@ -42,41 +41,35 @@ let solveWithRecursion2 () =
     |> Set.ofList
     |> Set.count
 
-//Модульная реализация (генерация, фильтрация, свёртка)
+//генерация, фильтрация, свёртка
 let solveModular () =
-    // Генерация всех пар (a, b)
+    //пары а,б
     let generatePairs () : (int * int) list =
         [ for a in minA..maxA do
             for b in minB..maxB do
                 yield (a, b) ]
     
-    // Отображение пар в значения степеней
     let computePowers (pairs: (int * int) list) =
         pairs |> List.map (fun (a, b) -> pown (bigint a) b)
     
-    // "Фильтрация" уникальных значений (через Set)
+    //фильтрация через Set
     let filterDistinct values =
         values |> Set.ofList
     
-    // Свёртка - подсчёт количества
     let countElements set =
         Set.fold (fun acc _ -> acc + 1) 0 set
     
-    // Композиция
     generatePairs ()
     |> computePowers
     |> filterDistinct
     |> countElements
 
-//Генерация последовательности при помощи отображения (map)
+//Генерация последовательности при помощи мапы
 let solveWithMap () =
-    //список оснований
     let bases = [minA..maxA]
     
-    //список показателей
     let exponents = [minB..maxB]
     
-    //отображаем в список степеней
     let allPowers =
         bases
         |> List.map (fun a ->
@@ -86,7 +79,7 @@ let solveWithMap () =
     
     allPowers |> Set.ofList |> Set.count
 
-// Альтернативная версия с List.collect (flatMap)
+//версия с List.collect 
 let solveWithMap2 () =
     [minA..maxA]
     |> List.collect (fun a ->
@@ -95,7 +88,7 @@ let solveWithMap2 () =
     |> Set.ofList
     |> Set.count
 
-//Цикл
+//цикл
 let solveWithLoop () =
     [minA..maxA]
     |> List.collect (fun a ->
@@ -112,16 +105,16 @@ let solveWithComprehension () =
                 yield pown (bigint a) b ]
     values |> Set.ofList |> Set.count
 
-//Ленивая последовательность
+//ленивая последовательность
 let solveWithLazySequence () =
-    // Бесконечная последовательность всех пар (a, b) начиная с (2, 2)
+    //бесконечная последовательность
     let allPairs = seq {
         for a in Seq.initInfinite (fun i -> i + minA) do
             for b in minB..maxB do
                 yield (a, b)
     }
     
-    // Берём только те пары, где a <= maxA
+    //берём пары где a <= maxA
     allPairs
     |> Seq.takeWhile (fun (a, _) -> a <= maxA)
     |> Seq.map (fun (a, b) -> pown (bigint a) b)
@@ -133,7 +126,6 @@ let solveWithLazySequence2 () =
     let powersOf (a: int) =
         Seq.init (maxB - minB + 1) (fun i -> pown (bigint a) (i + minB))
     
-    // Генерируем все степени для всех оснований
     seq { minA..maxA }
     |> Seq.collect (fun a ->
         powersOf a)

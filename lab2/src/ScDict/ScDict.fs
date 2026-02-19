@@ -25,11 +25,8 @@ module ScDict =
 
     let empty<'Key, 'Value when 'Key: equality> : ScDict<'Key, 'Value> =
         emptyWithCapacity defaultCapacity
-
     let isEmpty dict = dict.Count = 0
-
     let size dict = dict.Count
-
     let private bucketIndex bucketCount key =
         (hash key &&& Int32.MaxValue) % bucketCount
 

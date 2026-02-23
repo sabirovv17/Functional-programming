@@ -34,13 +34,6 @@ $$
 - `expiring` — сколько из них «закончится скоро»
 - `missing` — сколько не хватает
 
-## Запуск
-
-```bash
-cd lab4
-dotnet run
-```
-
 ## API
 
 - **Основной:** [TheMealDB](https://www.themealdb.com/api.php) (бесплатный, ключ `1` для разработки)

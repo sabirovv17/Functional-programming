@@ -9,11 +9,11 @@ let scoreRecipe (pantrySet: Set<string>) (expiringSet: Set<string>) (recipe: Rec
 
     let total = float (List.length recipeIngredients)
     let matched =
-        recipeIngredients |> List.filter (fun n -> Set.contains n pantrySet)
+        recipeIngredients |> List.filter (fun n -> fuzzyContains pantrySet n)
     let missing =
-        recipeIngredients |> List.filter (fun n -> not (Set.contains n pantrySet))
+        recipeIngredients |> List.filter (fun n -> not (fuzzyContains pantrySet n))
     let usesExpiring =
-        recipeIngredients |> List.filter (fun n -> Set.contains n expiringSet)
+        recipeIngredients |> List.filter (fun n -> fuzzyContains expiringSet n)
 
     let matchedCount = List.length matched
     let missingCount = List.length missing
@@ -26,7 +26,6 @@ let scoreRecipe (pantrySet: Set<string>) (expiringSet: Set<string>) (recipe: Rec
     let kind =
         if missingCount = 0 then CanCook
         elif List.length usesExpiring > 0 then EatSoonPriority
-        elif missingCount <= 3 then AlmostCanCook
         else AlmostCanCook
 
     { Recipe = recipe
@@ -57,8 +56,8 @@ let classifyRecipes
 
     let almostCanCook =
         scored
-        |> List.filter (fun sr ->
-            sr.Kind = AlmostCanCook && sr.MissingIngredients.Length <= 3)
+        |> List.filter (fun sr -> sr.Kind = AlmostCanCook)
+        |> List.truncate 10
 
     let eatSoon =
         scored |> List.filter (fun sr -> sr.Kind = EatSoonPriority)

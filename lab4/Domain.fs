@@ -59,10 +59,15 @@ type AppConfig =
 let defaultConfig =
     { MealDbBaseUrl = "https://www.themealdb.com/api/json/v1/1"
       CacheHours = 6
-      ExpiringSoonDays = 3 }
+      ExpiringSoonDays = 7 }
 
 let normaliseName (s: string) =
     s.Trim().ToLowerInvariant()
+
+let fuzzyContains (pantrySet: Set<string>) (ingredientName: string) : bool =
+    let norm = normaliseName ingredientName
+    pantrySet |> Set.exists (fun p ->
+        norm.Contains(p) || p.Contains(norm))
 
 let expiringSoon (days: int) (now: DateTime) (pantry: Pantry) : Pantry =
     pantry
